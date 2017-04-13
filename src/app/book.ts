@@ -1,8 +1,9 @@
 export class Book {
+  id: number;
 title: string = '';
 author: string = '';
-ISBN: string = '';
-quantity: string = '';
+ISBN: number;
+quantity: number;
 published: string = '';
 category: string = '';
 issued: number = 0;

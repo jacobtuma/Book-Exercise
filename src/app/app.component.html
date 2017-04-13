@@ -1,3 +1,40 @@
-<h1>
-  {{title}}
-</h1>
+
+  <header class="header">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lora|Mukta+Vaani" rel="stylesheet">
+  </header>
+  <section class="bookapp container-fluid">
+  <h1 class="text-center">Library App</h1>
+
+  <section class="main row" *ngIf="books.length > 0">
+    <div class="book-list">
+      <div class='col-md-3' *ngFor="let book of books" [class.completed]="book.complete">
+        <a (click)="setValue(book.id)">
+        <div class="red" >
+          <h3>"{{book.title}}"</h3>
+          <h4>{{book.author}}</h4>
+          <h2>{{this.myValue}}</h2>
+          <h4>Published: {{book.published}}</h4>
+          <p><strong>Quantity:</strong> {{book.quantity}} <strong>Issued:</strong> {{book.issued}}</p>
+          <p class="text-left">{{book.ISBN}}</p>   <p class="text-right">{{book.category | uppercase}}</p>
+          <button (click)="isClassVisible = !isClassVisible;" class="form-control"></button>
+          <input class="toggle" type="checkbox"  [checked]="book.complete">
+        </div>
+        </a>
+      </div>
+    </div>
+  </section>
+    <section class="row">
+      <button (click)="removeBook()">Remove Book</button>
+      <input placeholder="Edit Entry" (keyup.enter)="editEntry()"><br>
+      <input class="new-book" placeholder="Title" autofocus="" [(ngModel)]="newBook.title" (keyup.enter)="addBook()"><br>
+      <input class="new-book" placeholder="Author" autofocus="" [(ngModel)]="newBook.author" (keyup.enter)="addBook()"><br>
+      <input class="new-book" placeholder="Category" autofocus="" [(ngModel)]="newBook.category" (keyup.enter)="addBook()"><br>
+      <input class="new-book" placeholder="Publish Date" autofocus="" [(ngModel)]="newBook.published" (keyup.enter)="addBook()"><br>
+      <input class="new-book" placeholder="Quantity on hand" autofocus="" [(ngModel)]="newBook.quantity" (keyup.enter)="addBook()"><br>
+      <input class="new-book" placeholder="ISBN Number" autofocus="" [(ngModel)]="newBook.ISBN" (keyup.enter)="addBook()"><br>
+    </section>
+  <footer class="footer" *ngIf="books.length > 0">
+    <span class="book-count"><strong>{{books.length}}</strong> {{books.length == 1 ? 'Entry' : 'Entries'}} </span>
+  </footer>
+</section>

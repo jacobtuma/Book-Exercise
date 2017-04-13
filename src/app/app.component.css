@@ -1,0 +1,32 @@
+body {
+  background: hotpink;
+}
+.bookapp {
+  margin: 0 10%;
+  font-family: 'Mukta Vaani';
+  background-color:rgba(0, 0, 0.5, 0)
+}
+h1 {
+  font-family: 'Lora';
+  font-size: 48px;
+  font-weight: bold;
+}
+.red {
+  border: dimgray 1px solid;
+  padding: 0 20px;
+  height: 32%;
+  background: whitesmoke;
+
+}
+a {
+cursor: pointer;
+}
+a:hover {
+  text-decoration: none;
+}
+.result-box {
+  text-align: center;
+}
+.my-class{
+  background-color: yellow;
+}
