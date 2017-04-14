@@ -6,7 +6,7 @@ export class BookDataService {
 
   // Placeholder for last id so we can simulate
   // automatic incrementing of id's
-  lastId: number = 0;
+  lastId: number = 3;
 
   // Placeholder for book's
   books: Book[] = [
@@ -29,7 +29,19 @@ export class BookDataService {
       published: '9/26/97',
       quantity: 2,
       title: 'A Ripple In Time'
-    }];
+    },
+    {
+      ISBN: 2230,
+      author: 'Jacob 2ma',
+      category: 'Mystery',
+      id: 3,
+      issued: 0,
+      published: '9/26/97',
+      quantity: 2,
+      title: 'A Ripple In Time'
+    }
+    ];
+
 
   constructor() {
   }
@@ -40,7 +52,6 @@ export class BookDataService {
       book.id = ++this.lastId;
     }
     this.books.push(book);
-    console.log(this.books)
     return this;
   }
 
@@ -50,6 +61,8 @@ export class BookDataService {
       .filter(book => book.id !== id);
     return this;
   }
+
+
 
   // Simulate PUT /books/:id
   updateBookById(id: number, values: Object = {}): Book {

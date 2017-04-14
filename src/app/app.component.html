@@ -9,30 +9,46 @@
   <section class="main row" *ngIf="books.length > 0">
     <div class="book-list">
       <div class='col-md-3' *ngFor="let book of books" [class.completed]="book.complete">
-        <a (click)="setValue(book.id)">
-        <div class="red" >
+
+        <div class="red" (click)="toggleHighlight(book.id);" [ngClass]="{'blue': highlightedDiv === book.id}"  >
+
           <h3>"{{book.title}}"</h3>
           <h4>{{book.author}}</h4>
-          <h2>{{this.myValue}}</h2>
           <h4>Published: {{book.published}}</h4>
+
           <p><strong>Quantity:</strong> {{book.quantity}} <strong>Issued:</strong> {{book.issued}}</p>
           <p class="text-left">{{book.ISBN}}</p>   <p class="text-right">{{book.category | uppercase}}</p>
-          <button (click)="isClassVisible = !isClassVisible;" class="form-control"></button>
-          <input class="toggle" type="checkbox"  [checked]="book.complete">
+          <button id="issue" (click)="issueBook(book)">Issue</button> <button id="return" (click)="returnBook(book)" >Return</button>
         </div>
-        </a>
       </div>
     </div>
   </section>
-    <section class="row">
-      <button (click)="removeBook()">Remove Book</button>
-      <input placeholder="Edit Entry" (keyup.enter)="editEntry()"><br>
-      <input class="new-book" placeholder="Title" autofocus="" [(ngModel)]="newBook.title" (keyup.enter)="addBook()"><br>
-      <input class="new-book" placeholder="Author" autofocus="" [(ngModel)]="newBook.author" (keyup.enter)="addBook()"><br>
-      <input class="new-book" placeholder="Category" autofocus="" [(ngModel)]="newBook.category" (keyup.enter)="addBook()"><br>
-      <input class="new-book" placeholder="Publish Date" autofocus="" [(ngModel)]="newBook.published" (keyup.enter)="addBook()"><br>
-      <input class="new-book" placeholder="Quantity on hand" autofocus="" [(ngModel)]="newBook.quantity" (keyup.enter)="addBook()"><br>
-      <input class="new-book" placeholder="ISBN Number" autofocus="" [(ngModel)]="newBook.ISBN" (keyup.enter)="addBook()"><br>
+
+    <section *ngIf="books.length == 0" >
+<h2>No Entries, add a new entry below</h2>
+    </section>
+    <section class="row menu">
+      <div class="col-md-3">
+      <button class="form-control" (click)="removeBook()">Remove Book</button>
+      </div>
+      <div class="col-md-3">
+      <input class="form-control" #editQuan placeholder="Change Selected Entry's Quantity" (keyup.enter)="editEntry(editQuan.value)"><br>
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="col-md-6">
+      <input class="new-book form-control" placeholder="Title" required minlength="4" autofocus="" [(ngModel)]="newBook.title" (keyup.enter)="addBook()"><br>
+      <input class="new-book form-control" placeholder="Author" required minlength="4" autofocus="" [(ngModel)]="newBook.author" (keyup.enter)="addBook()"><br>
+      <input class="new-book form-control" placeholder="Category" required minlength="4" autofocus="" [(ngModel)]="newBook.category" (keyup.enter)="addBook()"><br>
+        </div>
+          <div class="col-md-6">
+      <input class="new-book form-control" placeholder="Publish Date" required minlength="4" autofocus="" [(ngModel)]="newBook.published" (keyup.enter)="addBook()"><br>
+      <input class="new-book form-control" placeholder="Quantity on hand" autofocus="" [(ngModel)]="newBook.quantity" (keyup.enter)="addBook()"><br>
+      <input class="new-book form-control" placeholder="ISBN Number" autofocus="" [(ngModel)]="newBook.ISBN" (keyup.enter)="addBook()"><br>
+          </div>
+        <button class="form-control" (click)="addBook()">Add Entry</button>
+      </div>
     </section>
   <footer class="footer" *ngIf="books.length > 0">
     <span class="book-count"><strong>{{books.length}}</strong> {{books.length == 1 ? 'Entry' : 'Entries'}} </span>
